@@ -7,7 +7,7 @@
  * @file : dbconn.php
  * @author : ParkSeongHyun
  * @since : 2020-09-17
- * @desc : 
+ * @desc : asdasd
  * 
  */
 
