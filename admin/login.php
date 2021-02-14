@@ -20,8 +20,7 @@
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 
   <script>
-    function submit_func()
-    {
+    function submit_func() {
       var form_class = $(".user");
       form_class.submit();
     }
@@ -49,6 +48,7 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
+                  <!--form-->
                   <form class="user" action="../databases/register/login_db.php" method="POST">
                     <div class="form-group">
                       <input type="text" class="form-control form-control-user" id="user_id" name="login_id" aria-describedby="emailHelp" placeholder="Enter User id">

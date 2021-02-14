@@ -1,22 +1,22 @@
 <?php
-  session_start();
-  /**
-   * 
-   * 메뉴 리스트
-   * 
-   * @file : category.php
-   * @author : ParkSeongHyun
-   * @since : 2020-09-28
-   * @desc : 메뉴리스트 설정 페이지
-   * 
-   */
+session_start();
+/**
+ * 
+ * 메뉴 리스트
+ * 
+ * @file : category.php
+ * @author : ParkSeongHyun
+ * @since : 2020-09-28
+ * @desc : 메뉴리스트 설정 페이지
+ * 
+ */
 
-  include "../../dbconn.php";
+include "../../dbconn.php";
 
-  //상품정보 불러오는 query
-  $pSql = "SELECT * FROM PSM_CATEGORY";
-  $pResult = mysqli_query($conn, $pSql);
-  
+//상품정보 불러오는 query
+$pSql = "SELECT * FROM PSM_CATEGORY";
+$pResult = mysqli_query($conn, $pSql);
+
 ?>
 
 <!DOCTYPE html>
@@ -49,8 +49,8 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     <?php
-      //왼쪽 사이드바 include
-      include "../sidebar.php";
+    //왼쪽 사이드바 include
+    include "../sidebar.php";
     ?>
 
     <!-- Content Wrapper -->
@@ -58,16 +58,16 @@
 
       <!-- Main Content -->
       <div id="content">
-      <?php
-          include "../top_navbar.php";
+        <?php
+        include "../top_navbar.php";
         ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
-        
+
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">메뉴 리스트</h1>
           <p class="mb-4">메뉴 데이터 테이블 / <a target="_blank" href="https://datatables.net">메뉴등록</a></p>
-          
+
 
           <a href="./category_insert.php" class="btn btn-secondary btn-icon-split" style="margin-bottom:20px">
             <span class="icon text-white-50">
@@ -75,7 +75,7 @@
             </span>
             <span class="text">메뉴 등록</span>
           </a>
-          
+
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -91,32 +91,31 @@
                       <th>수정</th>
                     </tr>
                   </thead>
-                  
+
                   <tbody>
-                  
+
                     <?php
-                      while($pRow = mysqli_fetch_array($pResult))
-                      {
+                    while ($pRow = mysqli_fetch_array($pResult)) {
                     ?>
-                        <tr>
-                          <td><?=$pRow['category_title'] ?></td>
-                          <td><?=$pRow['is_display_YN'] ?></td>
-                          <td style="text-align:center">
-                            <a href="http://localhost/shopping_mall/admin/category_setting/category_update.php?idx=<?=$pRow['idx']?>" class="btn btn-info btn-circle">
-                              <i class="fas fa-info-circle"></i>
-                            </a>
-                          </td>
-                        </tr>
+                      <tr>
+                        <td><?= $pRow['category_title'] ?></td>
+                        <td><?= $pRow['is_display_YN'] ?></td>
+                        <td style="text-align:center">
+                          <a href="http://localhost/shopping_mall_admin/admin/category_setting/category_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
+                            <i class="fas fa-info-circle"></i>
+                          </a>
+                        </td>
+                      </tr>
                     <?php
-                      }
+                    }
                     ?>
-                   
+
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-                  
+
         </div>
         <!-- /.container-fluid -->
 
