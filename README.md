@@ -1,10 +1,9 @@
 <h1>#PHP 쇼핑몰 개발</h1>
 #벤치마킹 사이트 : http://www.ssumj.com/<br/>
 #시작일시 : 2020-08-09 22:04:05<br/>
-#마지막 업데이트 일시 : 2020-10-25 14:20:00<br/>
+#마지막 업데이트 일시 : 2021-02-15<br/>
 #마지막 업데이트 OS : Mac <br/>
-#금일 작업범위 : 유저정보 업데이트 select option DB값에 맞는 option 자동 select 되게<br/>
-#다음 작업 : 상품 이미지 등록 file_attach, 유저 이미지 등록 file_attach<br/>
+#금일 작업범위 : 유저 프로필 이미지 업로드 작업중<br/>
 #Author : 박성현<br/>
 #branch : Librariann<br/>
 <br/>
@@ -30,6 +29,7 @@ default-character-set = utf8<br/>
 ```
 
 ================================================
+
 ```
 php 에러날때 디버깅 코드 <br />
 error_reporting(E_ALL);<br/>

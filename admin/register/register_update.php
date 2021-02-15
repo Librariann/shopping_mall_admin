@@ -24,11 +24,10 @@ $pResult = mysqli_query($conn, $pSql);
 $pRow = mysqli_fetch_array($pResult);
 
 //파일 고유 id 부여
-if($pRow['file_attach_id'] == ""){
-    $file_attach_id = uuid();
-}
-else{
-    $file_attach_id = $pRow['file_attach_id'];
+if ($pRow['file_attach_id'] == "") {
+  $file_attach_id = uuid();
+} else {
+  $file_attach_id = $pRow['file_attach_id'];
 }
 
 ?>
@@ -55,9 +54,9 @@ else{
 
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-  
+
   <script>
-      /**
+    /**
      * @name : daum_post
      * @desc : 다음 주소 API
      * @return
@@ -71,15 +70,12 @@ else{
       }).open();
     }
 
-    function user_update_db()
-    {
+    function user_update_db() {
       var user_update = document.user_update;
-      var user_idx = user_update.idx.value;//상품 고유 id
-          
+      var user_idx = user_update.idx.value; //상품 고유 id
+
       user_update.submit();
     }
-
-
   </script>
 
 </head>
@@ -92,7 +88,7 @@ else{
       <div class="card-body p-0">
         <!-- Nested Row within Card Body -->
         <div class="row">
-          
+
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
@@ -101,39 +97,44 @@ else{
 
               <!--data form-->
               <form id="user_update" class="user_update" name="user_update" action="../../databases/register/register_update_db.php" method="POST">
-                <input type="hidden" name="idx" value="<?=$pRow['idx']?>">
+                <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>">
                 <div class="form-group">
-                  회원아이디 : <input type="text" class="form-control form-control-user" id="exampleFirstId" name="exampleFirstId" value="<?=$pRow['user_id']?>" readonly>
+                  회원아이디 : <input type="text" class="form-control form-control-user" id="exampleFirstId" name="exampleFirstId" value="<?= $pRow['user_id'] ?>" readonly>
                 </div>
                 <div class="form-group">
-                    회원명 : <input type="text" class="form-control form-control-user" id="exampleName" name="exampleName" placeholder="회원명을 입력해주세요" value="<?=$pRow['user_name']?>">
+                  회원명 : <input type="text" class="form-control form-control-user" id="exampleName" name="exampleName" placeholder="회원명을 입력해주세요" value="<?= $pRow['user_name'] ?>">
                 </div>
                 <div class="form-group">
-                    <!--TODO: 2020-10-05 select option DB값에 맞는 option 자동 select 되게 작업 예정-->
-                     회원등급 : <select class="form-control form-control-user" id="user_grade" name="user_grade">
-                                  <option value="1" <?if($pRow['user_grade'] == 1){?>selected<?}?>>운영자</option>
-                                  <option value="2" <?if($pRow['user_grade'] == 2){?>selected<?}?>>부운영자</option>
-                                  <option value="3" <?if($pRow['user_grade'] == 3){?>selected<?}?>>사원</option>
-                                  <option value="4" <?if($pRow['user_grade'] == 4){?>selected<?}?>>고객</option>
-                                  <option value="5" <?if($pRow['user_grade'] == 5){?>selected<?}?>>우수고객</option>
-                                </select>
+                  <!--TODO: 2020-10-05 select option DB값에 맞는 option 자동 select 되게 작업 예정-->
+                  회원등급 : <select class="form-control form-control-user" id="user_grade" name="user_grade">
+                    <option value="1" <?if($pRow['user_grade']==1){?>selected
+                      <?}?>>운영자</option>
+                    <option value="2" <?if($pRow['user_grade']==2){?>selected
+                      <?}?>>부운영자</option>
+                    <option value="3" <?if($pRow['user_grade']==3){?>selected
+                      <?}?>>사원</option>
+                    <option value="4" <?if($pRow['user_grade']==4){?>selected
+                      <?}?>>고객</option>
+                    <option value="5" <?if($pRow['user_grade']==5){?>selected
+                      <?}?>>우수고객</option>
+                  </select>
                 </div>
                 <div class="form-group" style="margin:0">
-                    <?
+                  <?
                       $phoneNumber = explode("-",$pRow['user_phone']);
                     ?>
-                    전화번호 : 
-                    <div class="form-group row" style="margin:0">
-                      <div class="col-sm-4 mb-3 mb-sm-3">
-                        <input type="text" class="form-control form-control-user" maxlength="3" id="examplePhoneNumber1" name="examplePhoneNumber1" value="010" placeholder="전화번호을 입력해주세요" readonly>
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" maxlength="4" id="examplePhoneNumber2" name="examplePhoneNumber2" placeholder="전화번호 가운데" value="<?=$phoneNumber[1]?>">
-                      </div>
-                      <div class="col-sm-4">
-                        <input type="text" class="form-control form-control-user" maxlength="4" id="examplePhoneNumber3" name="examplePhoneNumber3" placeholder="전화번호 마지막" value="<?=$phoneNumber[2]?>">
-                      </div>
+                  전화번호 :
+                  <div class="form-group row" style="margin:0">
+                    <div class="col-sm-4 mb-3 mb-sm-3">
+                      <input type="text" class="form-control form-control-user" maxlength="3" id="examplePhoneNumber1" name="examplePhoneNumber1" value="010" placeholder="전화번호을 입력해주세요" readonly>
                     </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" maxlength="4" id="examplePhoneNumber2" name="examplePhoneNumber2" placeholder="전화번호 가운데" value="<?= $phoneNumber[1] ?>">
+                    </div>
+                    <div class="col-sm-4">
+                      <input type="text" class="form-control form-control-user" maxlength="4" id="examplePhoneNumber3" name="examplePhoneNumber3" placeholder="전화번호 마지막" value="<?= $phoneNumber[2] ?>">
+                    </div>
+                  </div>
                 </div>
                 <div class="form-group">
                   <a href="#" class="btn btn-primary btn-icon-split btn-sm" onclick="daum_post()">
@@ -147,29 +148,36 @@ else{
                 </div>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-3">
-                    <input type="text" class="form-control form-control-user" id="examplePost" name="examplePost" placeholder="주소를 입력해주세요" value="<?=$pRow['user_post']?>">
+                    <input type="text" class="form-control form-control-user" id="examplePost" name="examplePost" placeholder="주소를 입력해주세요" value="<?= $pRow['user_post'] ?>">
                   </div>
                   <div class="col-sm-6">
-                    <input type="text" class="form-control form-control-user" id="zoneCode" name="zoneCode" placeholder="우편번호를 입력해주세요" value="<?=$pRow['user_zonecode']?>">
+                    <input type="text" class="form-control form-control-user" id="zoneCode" name="zoneCode" placeholder="우편번호를 입력해주세요" value="<?= $pRow['user_zonecode'] ?>">
                   </div>
                   <div class="col-sm-12">
-                    <input type=" text" class="form-control form-control-user" id="examplePost2" name="examplePost2" placeholder="상세주소를 입력해주세요" value="<?=$pRow['user_post2']?>">
+                    <input type=" text" class="form-control form-control-user" id="examplePost2" name="examplePost2" placeholder="상세주소를 입력해주세요" value="<?= $pRow['user_post2'] ?>">
                   </div>
                 </div>
                 <div class="form-group">
-                  이메일 : <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="exampleInputEmail" value="<?=$pRow['user_email']?>">
+                  이메일 : <input type="text" class="form-control form-control-user" id="exampleInputEmail" name="exampleInputEmail" value="<?= $pRow['user_email'] ?>">
                 </div>
-                
 
-                <input type="hidden" name="idx" value="<?=$pRow['idx']?>" />
-                <input type="hidden" name="file_attach_id" value="<?=$file_attach_id?>" />
-                
+
+                <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+                <input type="hidden" name="file_attach_id" value="<?= $file_attach_id ?>" />
+
                 <div class="btn btn-primary btn-user btn-block" onclick="user_update_db()">
-                유저정보 수정
+                  유저정보 수정
                 </div>
               </form>
-             
+
             </div>
+          </div>
+          <div class="col-lg-5 d-none d-lg-block">
+            <img src="" alt="유저 이미지">
+            <form action="../../databases/file_upload/upload_process.php" method="POST">
+              <input type="submit" value="이미지 등록">
+            </form>
+
           </div>
         </div>
       </div>
