@@ -1,6 +1,35 @@
-.checkBtn #chk1 { position:absolute; left: -1000% }
-.checkBtn label { display: block; position: relative; width:70px; height:30px; background: #d3d3d3; border-radius:60px; transition: background .4s; }
-.checkBtn label:after { content: ""; position: absolute; left:7.5px; top:50%; width:25px; height:25px; border-radius: 100%; background:#fff; transform: translateY(-50%); box-shadow:1px 3px 4px rgba(0,0,0,.1); transition:all .4s; }
-.checkBtn input:checked + label { background:#4fbe79; }
-.checkBtn input:checked + label:after { left:calc(100% - 32.5px); }
-.checkBtn label span { display:none }
+.checkBtn #chk1 {
+  position: absolute;
+  left: -1000%;
+}
+.checkBtn label {
+  display: block;
+  position: relative;
+  width: 70px;
+  height: 30px;
+  background: #d3d3d3;
+  border-radius: 60px;
+  transition: background 0.4s;
+}
+.checkBtn label:after {
+  content: "";
+  position: absolute;
+  left: 7.5px;
+  top: 50%;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background: #fff;
+  transform: translateY(-50%);
+  box-shadow: 1px 3px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+.checkBtn input:checked + label {
+  background: #4fbe79;
+}
+.checkBtn input:checked + label:after {
+  left: calc(100% - 32.5px);
+}
+.checkBtn label span {
+  display: none;
+}

@@ -51,6 +51,7 @@ if ($pRow['file_attach_id'] == "") {
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/public.css" rel="stylesheet">
 
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
@@ -77,6 +78,13 @@ if ($pRow['file_attach_id'] == "") {
       user_update.submit();
     }
   </script>
+
+  <style>
+    .user-img img {
+      width: 350px;
+      height: 350px;
+    }
+  </style>
 
 </head>
 
@@ -172,12 +180,13 @@ if ($pRow['file_attach_id'] == "") {
 
             </div>
           </div>
-          <div class="col-lg-5 d-none d-lg-block">
-            <img src="" alt="유저 이미지">
+          <div class="col-lg-5 d-none d-lg-block user-img" style="margin-top:15%">
+            <div id="image_container"></div>
+            <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
+            <!-- <img src="../img/unnamed.jpg" alt="유저 이미지">
             <form action="../../databases/file_upload/upload_process.php" method="POST">
               <input type="submit" value="이미지 등록">
-            </form>
-
+            </form> -->
           </div>
         </div>
       </div>
@@ -194,6 +203,19 @@ if ($pRow['file_attach_id'] == "") {
 
   <!-- Custom scripts for all pages-->
   <script src="js/sb-admin-2.min.js"></script>
+
+  <script>
+    function setThumbnail(event) {
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
+
 
 </body>
 
