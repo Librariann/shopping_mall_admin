@@ -24,10 +24,10 @@ $pResult = mysqli_query($conn, $pSql);
 $pRow = mysqli_fetch_array($pResult);
 
 //파일 고유 id 부여
-if ($pRow['file_attach_id'] == "") {
+if ($pRow['file_user_id'] == "") {
   $file_attach_id = uuid();
 } else {
-  $file_attach_id = $pRow['file_attach_id'];
+  $file_attach_id = $pRow['file_user_id'];
 }
 
 ?>
@@ -181,11 +181,14 @@ if ($pRow['file_attach_id'] == "") {
             </div>
           </div>
           <div class="col-lg-5 d-none d-lg-block user-img" style="margin-top:15%">
-            <div id="image_container"></div>
-            <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
-            <img src="../img/unnamed.jpg" alt="유저 이미지">
-            <form action="../../databases/file_upload/upload_process.php" method="POST">
+            <form action="../../databases/file_upload/upload_process.php" method="POST" enctype="multipart/form-data">
+              <div id="image_container">
+                <img src="../img/unnamed.jpg" class="unnamed" alt="유저 이미지">
+              </div>
+              <input type="file" name="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
               <input type="submit" value="이미지 등록">
+              <input type="hidden" name="file_id" id="" value="<?= $file_attach_id ?>">
+              <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
             </form>
           </div>
         </div>
@@ -206,6 +209,10 @@ if ($pRow['file_attach_id'] == "") {
 
   <script>
     function setThumbnail(event) {
+
+      const unnamed = document.querySelector(".unnamed");
+      unnamed.style.display = "none";
+
       var reader = new FileReader();
       reader.onload = function(event) {
         var img = document.createElement("img");
