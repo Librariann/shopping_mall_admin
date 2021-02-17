@@ -183,10 +183,10 @@ if ($pRow['file_attach_id'] == "") {
           <div class="col-lg-5 d-none d-lg-block user-img" style="margin-top:15%">
             <div id="image_container"></div>
             <input type="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
-            <!-- <img src="../img/unnamed.jpg" alt="유저 이미지">
+            <img src="../img/unnamed.jpg" alt="유저 이미지">
             <form action="../../databases/file_upload/upload_process.php" method="POST">
               <input type="submit" value="이미지 등록">
-            </form> -->
+            </form>
           </div>
         </div>
       </div>
