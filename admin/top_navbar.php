@@ -37,7 +37,22 @@ $cSql .= " AND is_display='1'";
 $cResult = mysqli_query($conn, $cSql);
 $cRow = mysqli_num_rows($cResult);
 
-// echo "Hello World!";
+//유저 등록된 이미지 불러오는 query
+$iSql = "SELECT * FROM PSM_UPLOAD_FILE";
+$iSql .= " WHERE file_user_id='$vRow[file_user_id]'";
+$iSql .= " AND is_display='1'";
+$iSql .= " ORDER BY idx DESC";
+$iResult = mysqli_query($conn, $iSql);
+$iRow = mysqli_fetch_array($iResult);
+
+//프로필 이미지 불러오는 count query
+$icSql = "SELECT count(*) AS cnt FROM PSM_UPLOAD_FILE";
+$icSql .= " WHERE file_user_id='$vRow[file_user_id]'";
+$icSql .= " AND is_display='1'";
+$icSql .= " ORDER BY idx DESC";
+$icResult = mysqli_query($conn, $icSql);
+$icRow = mysqli_fetch_array($icResult);
+
 ?>
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -92,7 +107,21 @@ $cRow = mysqli_num_rows($cResult);
       ?>
         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <span class="mr-2 d-none d-lg-inline text-gray-600 small">어서오세요 <?php echo $vRow['user_id']; ?> 님</span>
+          <?
+            if($icRow['cnt'] > 0)
+            {
+          ?>
+          <img class="img-profile rounded-circle" src="../databases/file_upload/data/<?= $iRow['file_save_name'] ?>">
+          <?
+            }
+            else
+            {
+          ?>
           <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+          <?
+            }
+          ?>
+
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
