@@ -23,6 +23,22 @@ $pSql .= " AND is_display='1'";
 $pResult = mysqli_query($conn, $pSql);
 $pRow = mysqli_fetch_array($pResult);
 
+//프로필 이미지 불러오는 query
+$iSql = "SELECT * FROM PSM_UPLOAD_FILE";
+$iSql .= " WHERE file_user_id='$pRow[file_user_id]'";
+$iSql .= " AND is_display='1'";
+$iSql .= " ORDER BY idx DESC";
+$iResult = mysqli_query($conn, $iSql);
+$iRow = mysqli_fetch_array($iResult);
+
+//프로필 이미지 불러오는 count query
+$icSql = "SELECT count(*) AS cnt FROM PSM_UPLOAD_FILE";
+$icSql .= " WHERE file_user_id='$pRow[file_user_id]'";
+$icSql .= " AND is_display='1'";
+$icSql .= " ORDER BY idx DESC";
+$icResult = mysqli_query($conn, $icSql);
+$icRow = mysqli_fetch_array($icResult);
+
 //파일 고유 id 부여
 if ($pRow['file_user_id'] == "") {
   $file_attach_id = uuid();
@@ -183,7 +199,21 @@ if ($pRow['file_user_id'] == "") {
           <div class="col-lg-5 d-none d-lg-block user-img" style="margin-top:15%">
             <form action="../../databases/file_upload/upload_process.php" method="POST" enctype="multipart/form-data">
               <div id="image_container">
-                <img src="../img/unnamed.jpg" class="unnamed" alt="유저 이미지">
+                <?
+                  if($icRow['cnt'] > 0)
+                  {
+                ?>
+                <img src="../../databases/file_upload/data/<?= $iRow['file_save_name'] ?>" class="img_preview" />
+                <?
+                  }
+                  else
+                  {
+                ?>
+                <img src="../img/unnamed.jpg" class="img_preview" alt="유저 이미지" />
+                <?
+                  }
+                ?>
+
               </div>
               <input type="file" name="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
               <input type="submit" value="이미지 등록">
@@ -210,7 +240,7 @@ if ($pRow['file_user_id'] == "") {
   <script>
     function setThumbnail(event) {
 
-      const unnamed = document.querySelector(".unnamed");
+      const unnamed = document.querySelector("img");
       unnamed.style.display = "none";
 
       var reader = new FileReader();
