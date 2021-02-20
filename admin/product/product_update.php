@@ -48,22 +48,16 @@ $pRow = mysqli_fetch_array($pResult);
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-      
-      function product_update_db()
-      {
-            const productUpdate = document.querySelector(".product_update");
-            const productCheckBox = productUpdate.product_discount_YN;
-            if(productCheckBox.checked === true){
-              productCheckBox.value = "Y";
-            }
-            
-            alert(productCheckBox.checked);
-            alert(productCheckBox.value);
-
-            productUpdate.submit();
+    function product_update_db() {
+      const productUpdate = document.querySelector(".product_update");
+      const productCheckBox = productUpdate.product_discount_YN;
+      if (productCheckBox.checked === true) {
+        productCheckBox.value = "Y";
       }
 
 
+      productUpdate.submit();
+    }
   </script>
 
 </head>
@@ -79,45 +73,49 @@ $pRow = mysqli_fetch_array($pResult);
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
-                <h1 class="h4 text-gray-900 mb-4">Create an Product!</h1>
+                <h1 class="h4 text-gray-900 mb-4">Modify an Product!</h1>
               </div>
 
               <!--data form-->
               <form id="product_update" class="product_update" name="product_update" action="../../databases/product/product_update_db.php" method="POST">
                 <div class="form-group">
-                    상품명 : <input type="text" class="form-control form-control-user" id="product_title" name="product_title" placeholder="상품명을 입력해주세요" value="<?=$pRow['product_title']?>">
+                  상품명 : <input type="text" class="form-control form-control-user" id="product_title" name="product_title" placeholder="상품명을 입력해주세요" value="<?= $pRow['product_title'] ?>">
                 </div>
                 <div class="form-group">
-                    상품가격 : <input type="text" class="form-control form-control-user" id="product_price" name="product_price" placeholder="상품가격을 입력해주세요" value="<?=$pRow['product_price']?>">
+                  상품가격 : <input type="text" class="form-control form-control-user" id="product_price" name="product_price" placeholder="상품가격을 입력해주세요" value="<?= $pRow['product_price'] ?>">
                 </div>
                 <div class="form-group">
-                    옷 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds01" <?if($pRow['product_kinds'] == "kinds01"){?>checked<?}?>>
-                    신발 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds02" <?if($pRow['product_kinds'] == "kinds02"){?>checked<?}?>>
-                    악세사리 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds03" <?if($pRow['product_kinds'] == "kinds03"){?>checked<?}?>>
+                  옷 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds01" <?if($pRow['product_kinds']=="kinds01" ){?>checked
+                  <?}?>>
+                  신발 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds02" <?if($pRow['product_kinds']=="kinds02" ){?>checked
+                  <?}?>>
+                  악세사리 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds03" <?if($pRow['product_kinds']=="kinds03" ){?>checked
+                  <?}?>>
                 </div>
                 <div class="form-group">
-                    전시여부 : <input type="text" class="form-control form-control-user" id="is_display" name="is_display" placeholder="전시여부" value="<?=$pRow['is_display']?>">
+                  전시여부 : <input type="text" class="form-control form-control-user" id="is_display" name="is_display" placeholder="전시여부" value="<?= $pRow['is_display'] ?>">
                 </div>
                 <div class="form-group">
-                    할인여부 :
-                    <div class="checkBtn">
-                      <input type="checkbox" name="product_discount_YN" id="chk1" <?if($pRow['product_discount_YN'] == "Y"){?>checked<?}?>>
-                        <label for="chk1">
-                          <span>선택</span>
-                        </label>
-                    </div>
+                  할인여부 :
+                  <div class="checkBtn">
+                    <input type="checkbox" name="product_discount_YN" id="chk1" <?if($pRow['product_discount_YN']=="Y" ){?>checked
+                    <?}?>>
+                    <label for="chk1">
+                      <span>선택</span>
+                    </label>
+                  </div>
                 </div>
                 <div class="form-group">
-                    할인가격 : <input type="text" class="form-control form-control-user" id="product_discount_price" name="product_discount_price" placeholder="할인가격을 입력해주세요" value="<?=$pRow['product_discount_price']?>">
+                  할인가격 : <input type="text" class="form-control form-control-user" id="product_discount_price" name="product_discount_price" placeholder="할인가격을 입력해주세요" value="<?= $pRow['product_discount_price'] ?>">
                 </div>
 
-                <input type="hidden" name="idx" value="<?=$pRow['idx']?>" />
-                
+                <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+
                 <div class="btn btn-primary btn-user btn-block" onclick="product_update_db()">
-                상품수정
+                  상품수정
                 </div>
               </form>
-             
+
             </div>
           </div>
         </div>

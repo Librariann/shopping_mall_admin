@@ -111,7 +111,7 @@ $icRow = mysqli_fetch_array($icResult);
             if($icRow['cnt'] > 0)
             {
           ?>
-          <img class="img-profile rounded-circle" src="../databases/file_upload/data/<?= $iRow['file_save_name'] ?>">
+          <img class="img-profile rounded-circle" src="/shopping_mall_admin/databases/file_upload/data/<?= $iRow['file_save_name'] ?>">
           <?
             }
             else
@@ -138,10 +138,15 @@ $icRow = mysqli_fetch_array($icResult);
             Activity Log
           </a>
           <div class="dropdown-divider"></div> -->
+          <a class="dropdown-item" href="register/register_menu.php">
+            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+            Settings
+          </a>
           <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
             Logout
           </a>
+
         </div>
       <?php
       } else {

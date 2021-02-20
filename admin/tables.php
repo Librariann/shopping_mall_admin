@@ -1,23 +1,23 @@
 <?php
 
-  /**
-   * 
-   * 상품 테이블 리스트
-   * 
-   * @file : tables.php
-   * @author : ParkSeongHyun
-   * @since : 2020-09-25
-   * 
-   */
+/**
+ * 
+ * 상품 테이블 리스트
+ * 
+ * @file : tables.php
+ * @author : ParkSeongHyun
+ * @since : 2020-09-25
+ * 
+ */
 
-  session_start();
+session_start();
 
-  include "../dbconn.php";
+include "../dbconn.php";
 
-  //상품정보 불러오는 query
-  $pSql = "SELECT * FROM PSM_PRODUCT";
-  $pSql .= " WHERE is_display='1'";
-  $pResult = mysqli_query($conn, $pSql);
+//상품정보 불러오는 query
+$pSql = "SELECT * FROM PSM_PRODUCT";
+$pSql .= " WHERE is_display='1'";
+$pResult = mysqli_query($conn, $pSql);
 
 ?>
 
@@ -51,8 +51,8 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
     <?php
-      //왼쪽 사이드바 include
-      include "./sidebar.php";
+    //왼쪽 사이드바 include
+    include "./sidebar.php";
     ?>
 
     <!-- Content Wrapper -->
@@ -60,17 +60,17 @@
 
       <!-- Main Content -->
       <div id="content">
-      
+
         <?php
-          include "./top_navbar.php";
+        include "./inc/top_navbar.php";
         ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
-        
+
           <!-- Page Heading -->
           <h1 class="h3 mb-2 text-gray-800">상품 테이블</h1>
           <p class="mb-4">상품 데이터 테이블 / <a target="_blank" href="https://datatables.net">상품등록</a></p>
-          
+
 
           <a href="product/product_insert.php" class="btn btn-secondary btn-icon-split" style="margin-bottom:20px">
             <span class="icon text-white-50">
@@ -78,7 +78,7 @@
             </span>
             <span class="text">상품 등록</span>
           </a>
-          
+
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
@@ -97,52 +97,46 @@
                       <th>삭제</th>
                     </tr>
                   </thead>
-                  
+
                   <tbody>
-                  
+
                     <?php
-                      while($pRow = mysqli_fetch_array($pResult))
-                      {
-                        $kinds = "";
-                        if($pRow['product_kinds'] == "kinds01")
-                        {
-                          $kinds = "옷";
-                        }
-                        else if($pRow['product_kinds'] == "kinds02")
-                        {
-                          $kinds = "신발";
-                        }
-                        else if($pRow['product_kinds'] == "kinds03")
-                        {
-                          $kinds = "악세사리";
-                        }
-                    ?>
-                        <tr>
-                          <td><?=$pRow['product_title'] ?></td>
-                          <td><?=number_format($pRow['product_price']) ?> 원 </td>
-                          <td><?=$kinds?></td>
-                          <td><?=$pRow['product_discount_YN'] ?></td>
-                          <td style="text-align:center">
-                            <a href="./product/product_update.php?idx=<?=$pRow['idx']?>" class="btn btn-info btn-circle">
-                              <i class="fas fa-info-circle"></i>
-                            </a>
-                          </td>
-                          <td style="text-align:center">
-                            <a href="../databases/product/product_delete_db.php?idx=<?=$pRow['idx']?>" class="btn btn-danger btn-circle">
-                              <i class="fas fa-trash"></i>
-                            </a>
-                          </td>
-                        </tr>
-                    <?php
+                    while ($pRow = mysqli_fetch_array($pResult)) {
+                      $kinds = "";
+                      if ($pRow['product_kinds'] == "kinds01") {
+                        $kinds = "옷";
+                      } else if ($pRow['product_kinds'] == "kinds02") {
+                        $kinds = "신발";
+                      } else if ($pRow['product_kinds'] == "kinds03") {
+                        $kinds = "악세사리";
                       }
                     ?>
-                   
+                      <tr>
+                        <td><?= $pRow['product_title'] ?></td>
+                        <td><?= number_format($pRow['product_price']) ?> 원 </td>
+                        <td><?= $kinds ?></td>
+                        <td><?= $pRow['product_discount_YN'] ?></td>
+                        <td style="text-align:center">
+                          <a href="./product/product_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
+                            <i class="fas fa-info-circle"></i>
+                          </a>
+                        </td>
+                        <td style="text-align:center">
+                          <a href="../databases/product/product_delete_db.php?idx=<?= $pRow['idx'] ?>" class="btn btn-danger btn-circle">
+                            <i class="fas fa-trash"></i>
+                          </a>
+                        </td>
+                      </tr>
+                    <?php
+                    }
+                    ?>
+
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
-                  
+
         </div>
         <!-- /.container-fluid -->
 

@@ -43,8 +43,8 @@ include './function/function.php';
   <div id="wrapper">
 
     <?php
-      //왼쪽 사이드바 include
-      include "./sidebar.php";
+    //왼쪽 사이드바 include
+    include "./sidebar.php";
     ?>
 
     <!-- Content Wrapper -->
@@ -54,7 +54,7 @@ include './function/function.php';
       <div id="content">
 
         <?php
-          include "top_navbar.php";
+        include "./inc/top_navbar.php";
         ?>
 
         <!-- Begin Page Content -->

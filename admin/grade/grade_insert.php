@@ -59,7 +59,7 @@ $pResult = mysqli_query($conn, $pSql);
       <!-- Main Content -->
       <div id="content">
         <?php
-        include "../top_navbar.php";
+        include "../inc/top_navbar.php";
         ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">

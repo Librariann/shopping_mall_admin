@@ -31,21 +31,21 @@
 
   <!-- Custom styles for this template-->
   <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/public.css" rel="stylesheet">
 
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-      
-      function product_insert_db()
-      {
-            var product_insert = document.product_insert;
-            var product_title = product_insert.product_title.value;
-            var product_price = product_insert.product_price.value;
-            var product_kinds = product_insert.product_kinds.value;
-        product_insert.submit();
+    function product_insert_db() {
+      const productInsert = document.querySelector(".product_insert");
+      const productCheckBox = productInsert.product_discount_YN;
+      if (productCheckBox.checked === true) {
+        productCheckBox.value = "Y";
       }
-
-
+      alert(productCheckBox.value);
+      return;
+      product_insert.submit();
+    }
   </script>
 
 </head>
@@ -67,22 +67,38 @@
               <!--data form-->
               <form id="product_insert" class="product_insert" name="product_insert" action="../../databases/product/product_insert_db.php" method="POST">
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="product_title"" name="product_title"" placeholder="상품명을 입력해주세요">
+                  <input type="text" class="form-control form-control-user" id="product_title"" name=" product_title"" placeholder="상품명을 입력해주세요">
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control form-control-user" id="product_price"" name="product_price"" placeholder="상품가격을 입력해주세요">
+                  <input type="text" class="form-control form-control-user" id="product_price"" name=" product_price"" placeholder="상품가격을 입력해주세요">
                 </div>
                 <div class="form-group">
-                    옷 <input type="radio" name="product_kinds" value="kinds01" />
-                    신발 <input type="radio" name="product_kinds" value="kinds02" />
-                    악세사리 <input type="radio" name="product_kinds" value="kinds03" />
+                  옷 <input type="radio" name="product_kinds" value="kinds01" />
+                  신발 <input type="radio" name="product_kinds" value="kinds02" />
+                  악세사리 <input type="radio" name="product_kinds" value="kinds03" />
                 </div>
-                
+
+                <div class="form-group">
+                  전시여부 : <input type="text" class="form-control form-control-user" id="is_display" name="is_display" placeholder="전시여부" value="">
+                </div>
+                <div class="form-group">
+                  할인여부 :
+                  <div class="checkBtn">
+                    <input type="checkbox" name="product_discount_YN" id="chk1">
+                    <label for="chk1">
+                      <span>선택</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  할인가격 : <input type="text" class="form-control form-control-user" id="product_discount_price" name="product_discount_price" placeholder="할인가격을 입력해주세요" value="<?= $pRow['product_discount_price'] ?>">
+                </div>
+
                 <div class="btn btn-primary btn-user btn-block" onclick="product_insert_db()">
-                상품등록
+                  상품등록
                 </div>
               </form>
-             
+
             </div>
           </div>
         </div>
