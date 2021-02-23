@@ -125,19 +125,7 @@ $icRow = mysqli_fetch_array($icResult);
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-          <!-- <a class="dropdown-item" href="#">
-            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-            Profile
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-            Settings
-          </a>
-          <a class="dropdown-item" href="#">
-            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-            Activity Log
-          </a>
-          <div class="dropdown-divider"></div> -->
+
           <a class="dropdown-item" href="register/register_menu.php">
             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
             Settings
@@ -151,7 +139,7 @@ $icRow = mysqli_fetch_array($icResult);
       <?php
       } else {
       ?>
-        <a class="nav-link dropdown-toggle" href="http://localhost/shopping_mall_admin/admin/login.php">
+        <a class="nav-link dropdown-toggle" href="/shopping_mall_admin/admin/login.php">
           로그인
         </a>
       <?php
