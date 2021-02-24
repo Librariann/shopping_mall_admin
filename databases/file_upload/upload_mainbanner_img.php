@@ -1,11 +1,11 @@
 <?
 /**
  * 
- * 파일 업로드 프로세스 파일
+ * 메인배너 이미지 업로드
  * 
- * @file : upload_process.php
+ * @file : upload_mainbanner_img.php
  * @author : ParkSeongHyun
- * @since : 2020-10-04
+ * @since : 2021-02-24
  * @desc : 
  * 
  */
@@ -28,7 +28,7 @@ include "../../admin/function/function.php";
 if(isset($_FILES['file']) && $_FILES['file']['name'] != "") {
 
     $file = $_FILES['file'];
-    $upload_directory = 'data/';
+    $upload_directory = 'mainbanner/';
     $ext_str = "jpg,jpeg,gif,png";
     $allowed_extensions = explode(',', $ext_str);
 
@@ -55,9 +55,7 @@ if(isset($_FILES['file']) && $_FILES['file']['name'] != "") {
     //서버로 전송된 파일이 있을 때
     if(move_uploaded_file($file['tmp_name'], $upload_directory.$path)) 
     {
-
-        $user_idx = (int)$_REQUEST['idx'];
-        $file_id = $_REQUEST['file_id'];
+        $file_id = uuid();
         $file_origin_name = $file['name'];
         $file_save_name = $path;
         $login_id = $_SESSION['login_id'];
@@ -65,20 +63,19 @@ if(isset($_FILES['file']) && $_FILES['file']['name'] != "") {
         //파일 업로드 insert query
         $query = "INSERT INTO PSM_UPLOAD_FILE (file_id, file_origin_name, file_save_name, reg_id, mod_id) VALUES(?,?,?,?,?)";
         
-        
         $stmt = mysqli_prepare($conn, $query);
         $bind = mysqli_stmt_bind_param($stmt, "sssss", $file_id, $file_origin_name, $file_save_name, $login_id, $login_id);
         $exec = mysqli_stmt_execute($stmt);
 
         mysqli_stmt_close($stmt);
 
-        $user_update = "UPDATE PSM_USER SET file_id=? WHERE idx=?";
+        $banner_insert = "INSERT INTO PSM_MAINBANNER (file_id, reg_id, mod_id) VALUES (?,?,?)";
 
-        $userStmt = mysqli_prepare($conn, $user_update);
-        $userBind = mysqli_stmt_bind_param($userStmt, "si", $file_id, $user_idx);
-        $userExec = mysqli_stmt_execute($userStmt);
+        $bannerStmt = mysqli_prepare($conn, $banner_insert);
+        $bannerBind = mysqli_stmt_bind_param($bannerStmt, "sss", $file_id, $login_id, $login_id);
+        $bannerExec = mysqli_stmt_execute($bannerStmt);
 
-        mysqli_stmt_close($userStmt);
+        mysqli_stmt_close($bannerStmt);
 
         echo"<h3>파일 업로드 성공</h3>";
         echo '<a href="file_list.php">업로드 파일 목록</a>';

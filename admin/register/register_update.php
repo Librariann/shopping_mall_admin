@@ -25,7 +25,7 @@ $pRow = mysqli_fetch_array($pResult);
 
 //프로필 이미지 불러오는 query
 $iSql = "SELECT * FROM PSM_UPLOAD_FILE";
-$iSql .= " WHERE file_user_id='$pRow[file_user_id]'";
+$iSql .= " WHERE file_id='$pRow[file_id]'";
 $iSql .= " AND is_display='1'";
 $iSql .= " ORDER BY idx DESC";
 $iResult = mysqli_query($conn, $iSql);
@@ -33,17 +33,17 @@ $iRow = mysqli_fetch_array($iResult);
 
 //프로필 이미지 불러오는 count query
 $icSql = "SELECT count(*) AS cnt FROM PSM_UPLOAD_FILE";
-$icSql .= " WHERE file_user_id='$pRow[file_user_id]'";
+$icSql .= " WHERE file_id='$pRow[file_id]'";
 $icSql .= " AND is_display='1'";
 $icSql .= " ORDER BY idx DESC";
 $icResult = mysqli_query($conn, $icSql);
 $icRow = mysqli_fetch_array($icResult);
 
 //파일 고유 id 부여
-if ($pRow['file_user_id'] == "") {
+if ($pRow['file_id'] == "") {
   $file_attach_id = uuid();
 } else {
-  $file_attach_id = $pRow['file_user_id'];
+  $file_attach_id = $pRow['file_id'];
 }
 
 ?>
@@ -228,14 +228,14 @@ if ($pRow['file_user_id'] == "") {
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
   <script>
     function setThumbnail(event) {

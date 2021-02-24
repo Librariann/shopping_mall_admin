@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 //디버깅
 // error_reporting(E_ALL);
 // ini_set("display_errors", 1);
@@ -23,6 +23,15 @@ if (isset($_SESSION['login_id'])) {
 
 
 
+//로그인 ID 저장
+if (isset($_SESSION['login_id'])) {
+  $login_id = $_SESSION['login_id'];
+} else {
+  echo "로그인이 필요합니다.";
+  exit;
+}
+
+
 //로그인 유저 정보 불러오는 query
 $vSql = "SELECT * FROM PSM_USER";
 $vSql .= " WHERE user_id = '$login_id'";
@@ -39,7 +48,7 @@ $cRow = mysqli_num_rows($cResult);
 
 //유저 등록된 이미지 불러오는 query
 $iSql = "SELECT * FROM PSM_UPLOAD_FILE";
-$iSql .= " WHERE file_user_id='$vRow[file_user_id]'";
+$iSql .= " WHERE file_id='$vRow[file_id]'";
 $iSql .= " AND is_display='1'";
 $iSql .= " ORDER BY idx DESC";
 $iResult = mysqli_query($conn, $iSql);
@@ -47,7 +56,7 @@ $iRow = mysqli_fetch_array($iResult);
 
 //프로필 이미지 불러오는 count query
 $icSql = "SELECT count(*) AS cnt FROM PSM_UPLOAD_FILE";
-$icSql .= " WHERE file_user_id='$vRow[file_user_id]'";
+$icSql .= " WHERE file_id='$vRow[file_id]'";
 $icSql .= " AND is_display='1'";
 $icSql .= " ORDER BY idx DESC";
 $icResult = mysqli_query($conn, $icSql);

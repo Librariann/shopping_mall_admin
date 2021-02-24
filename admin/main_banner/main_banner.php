@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * 
  * 메인배너 등록 리스트
@@ -11,9 +11,12 @@
  * 
  */
 
-session_start();
-
 include "../../dbconn.php";
+
+$mSql = "SELECT * FROM PSM_MAINBANNER";
+$mSql .= " WHERE is_display='1'";
+$mResult = mysqli_query($conn, $mSql);
+
 
 ?>
 
@@ -36,7 +39,7 @@ include "../../dbconn.php";
 
     <!-- Custom styles for this template -->
     <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/modal.css" rel="stylesheet">
+    <link href="../css/main_banner.css" rel="stylesheet">
 
 
     <!-- Custom styles for this page -->
@@ -87,13 +90,7 @@ include "../../dbconn.php";
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>회원명</th>
-                                            <th>등급</th>
-                                            <th>전화번호</th>
-                                            <th>주소</th>
-                                            <th>상세주소</th>
-                                            <th>이메일</th>
-                                            <th>등록일</th>
+                                            <th>원본 파일명</th>
                                             <th>수정</th>
                                             <th>삭제</th>
                                         </tr>
@@ -102,17 +99,15 @@ include "../../dbconn.php";
                                     <tbody>
 
                                         <?php
-                                        while ($pRow = mysqli_fetch_array($pResult)) {
-
+                                        while ($mRow = mysqli_fetch_assoc($mResult)) {
+                                            $maSql = "SELECT * FROM PSM_UPLOAD_FILE";
+                                            $maSql .= " WHERE file_id='$mRow[file_id]'";
+                                            $maSql .= " AND is_display='1'";
+                                            $maResult = mysqli_query($conn, $maSql);
+                                            $maRow = mysqli_fetch_assoc($maResult)
                                         ?>
                                             <tr>
-                                                <td><?= $pRow['user_name'] ?></td>
-                                                <td><?= $pRow['user_grade'] ?> 원 </td>
-                                                <td><?= $pRow['user_phone'] ?></td>
-                                                <td><?= $pRow['user_post'] ?></td>
-                                                <td><?= $pRow['user_post2'] ?></td>
-                                                <td><?= $pRow['user_email'] ?></td>
-                                                <td><?= $pRow['reg_date'] ?></td>
+                                                <td><?= $maRow['file_id'] ?></td>
                                                 <td style="text-align:center">
                                                     <a href="http://localhost/shopping_mall_admin/admin/register/register_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-info-circle"></i>
@@ -184,16 +179,26 @@ include "../../dbconn.php";
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">메인배너 등록창</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                <div class="modal-body">
+                    <form name="imgForm" action="../../databases/file_upload/upload_mainbanner_img.php" method="POST" enctype="multipart/form-data">
+                        <div class="imgPreview">
+                        </div>
+                        <input type="file" name="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
+                        <input type="hidden" name="file_id" id="" value="<?= $file_attach_id ?>">
+                        <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+
                 </div>
+                </form>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                    <a class="btn btn-primary" href="#" onclick="mainBannerSubmit()">등록</a>
+                </div>
+
             </div>
         </div>
     </div>
@@ -214,6 +219,28 @@ include "../../dbconn.php";
 
     <!-- Page level custom scripts -->
     <script src="../js/demo/datatables-demo.js"></script>
+
+    <script>
+        function mainBannerSubmit() {
+            var imgSelector = document.imgForm;
+            imgSelector.submit();
+            return false;
+        }
+
+        function setThumbnail(event) {
+
+            // const unnamed = document.querySelector(".imgPreview > img");
+            // unnamed.style.display = "none";
+
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var img = document.createElement("img");
+                img.setAttribute("src", event.target.result);
+                document.querySelector(".imgPreview").appendChild(img);
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 
 </body>
 

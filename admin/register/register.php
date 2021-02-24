@@ -1,15 +1,5 @@
 <?php
-session_start();
-//로그인 ID 저장
-if(isset($_SESSION['login_id']))
-{
-  $login_id = $_SESSION['login_id'];
-}
-else
-{
-    echo "로그인이 필요합니다.";
-    exit;
-}
+
 /**
  * 
  * 회원가입 페이지
@@ -22,7 +12,9 @@ else
  * 
  */
 
-  include "../function/function.php";
+include "../function/function.php";
+
+
 
 ?>
 
@@ -53,19 +45,6 @@ else
   <script src="../js/file_upload.js"></script>
   <script>
     /**
-     * @name : phone_check
-     * @desc : 핸드폰 번호 체크하여 각 자리마다 "-" 넣어주는 함수
-     * @return
-     */
-    // function phone_check() {
-    //   var phone_number = $("#examplePhoneNumber").val();
-    //   var phone_number_check = phone_number.length;
-    //   if (phone_number_check == 3) {
-    //     $("#examplePhoneNumber").val(phone_number + "-");
-    //   }
-    // }
-
-    /**
      * @name : daum_post
      * @desc : 다음 주소 API
      * @return
@@ -78,7 +57,6 @@ else
         }
       }).open();
     }
-    
   </script>
 
 </head>
@@ -93,14 +71,14 @@ else
         <div class="row">
           <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
           <div>
-            
+
           </div>
           <div class="col-lg-7">
             <div class="p-5">
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              
+
               <!--data form-->
               <form id="user_form" class="user" name="user" action="../../databases/register/register_db.php" method="POST">
                 <div class="form-group">
