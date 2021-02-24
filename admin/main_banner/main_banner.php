@@ -15,9 +15,8 @@ include "../../dbconn.php";
 
 $mSql = "SELECT * FROM PSM_MAINBANNER";
 $mSql .= " WHERE is_display='1'";
+$mSql .= " ORDER BY reg_date DESC";
 $mResult = mysqli_query($conn, $mSql);
-
-
 ?>
 
 <!DOCTYPE html>
@@ -107,7 +106,7 @@ $mResult = mysqli_query($conn, $mSql);
                                             $maRow = mysqli_fetch_assoc($maResult);
                                         ?>
                                         <tr>
-                                            <td><?= $maRow['file_id'] ?></td>
+                                            <td><?= $maRow['file_origin_name'] ?></td>
                                             <td style="text-align:center">
                                                 <a href="#" class="btn btn-info btn-circle" data-toggle="modal" data-target="#mainbanner_update<?= $maRow['idx'] ?>">
                                                     <i class="fas fa-info-circle"></i>
