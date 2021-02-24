@@ -98,28 +98,51 @@ $mResult = mysqli_query($conn, $mSql);
 
                                     <tbody>
 
-                                        <?php
+                                        <?
                                         while ($mRow = mysqli_fetch_assoc($mResult)) {
                                             $maSql = "SELECT * FROM PSM_UPLOAD_FILE";
                                             $maSql .= " WHERE file_id='$mRow[file_id]'";
                                             $maSql .= " AND is_display='1'";
                                             $maResult = mysqli_query($conn, $maSql);
-                                            $maRow = mysqli_fetch_assoc($maResult)
+                                            $maRow = mysqli_fetch_assoc($maResult);
                                         ?>
-                                            <tr>
-                                                <td><?= $maRow['file_id'] ?></td>
-                                                <td style="text-align:center">
-                                                    <a href="http://localhost/shopping_mall_admin/admin/register/register_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
-                                                        <i class="fas fa-info-circle"></i>
-                                                    </a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="../databases/register/register_delete_db.php?idx=<?= $pRow['idx'] ?>" class="btn btn-danger btn-circle">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php
+                                        <tr>
+                                            <td><?= $maRow['file_id'] ?></td>
+                                            <td style="text-align:center">
+                                                <a href="#" class="btn btn-info btn-circle" data-toggle="modal" data-target="#mainbanner_update<?= $maRow['idx'] ?>">
+                                                    <i class="fas fa-info-circle"></i>
+                                                </a>
+                                            </td>
+                                            <td style="text-align:center">
+                                                <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#mainbanner_update">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <!--미리보기 창-->
+                                        <div class="modal fade" id="mainbanner_update<?= $maRow['idx'] ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">메인배너 미리보기 창</h5>
+                                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">×</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div>
+                                                            <img src="../../databases/file_upload/mainbanner/<?= $maRow['file_save_name'] ?>" alt="">
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                                        <a class="btn btn-primary" href="#" onclick="mainBannerSubmit()">등록</a>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?
                                         }
                                         ?>
 
@@ -156,7 +179,7 @@ $mResult = mysqli_query($conn, $mSql);
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
+
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -174,7 +197,7 @@ $mResult = mysqli_query($conn, $mSql);
             </div>
         </div>
     </div>
-
+    <!--등록창-->
     <div class="modal fade" id="mainbanner_insert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -191,9 +214,8 @@ $mResult = mysqli_query($conn, $mSql);
                         <input type="file" name="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
                         <input type="hidden" name="file_id" id="" value="<?= $file_attach_id ?>">
                         <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
-
+                    </form>
                 </div>
-                </form>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                     <a class="btn btn-primary" href="#" onclick="mainBannerSubmit()">등록</a>
