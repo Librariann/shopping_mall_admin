@@ -21,17 +21,6 @@ if (isset($_SESSION['login_id'])) {
   $login_id = $_SESSION['login_id'];
 }
 
-
-
-//로그인 ID 저장
-if (isset($_SESSION['login_id'])) {
-  $login_id = $_SESSION['login_id'];
-} else {
-  echo "로그인이 필요합니다.";
-  exit;
-}
-
-
 //로그인 유저 정보 불러오는 query
 $vSql = "SELECT * FROM PSM_USER";
 $vSql .= " WHERE user_id = '$login_id'";

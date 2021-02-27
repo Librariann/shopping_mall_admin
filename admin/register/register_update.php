@@ -39,6 +39,7 @@ $icSql .= " ORDER BY idx DESC";
 $icResult = mysqli_query($conn, $icSql);
 $icRow = mysqli_fetch_array($icResult);
 
+
 //파일 고유 id 부여
 if ($pRow['file_id'] == "") {
   $file_attach_id = uuid();
