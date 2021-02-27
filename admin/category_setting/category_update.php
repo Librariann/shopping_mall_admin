@@ -2,7 +2,7 @@
 
 /**
  * 
- * 메뉴리스ㅡㅌ 수정 페이지
+ * 메뉴리스트 수정 페이지
  * 
  * @file : category_update.php
  * @author : ParkSeongHyun
@@ -47,16 +47,10 @@ $pRow = mysqli_fetch_array($pResult);
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
   <script>
-      
-      function category_update_db()
-      {
-            var category_update = document.category_update;
-            
-            
-        category_update.submit();
-      }
-
-
+    function category_update_db() {
+      var category_update = document.category_update;
+      category_update.submit();
+    }
   </script>
 
 </head>
@@ -78,21 +72,23 @@ $pRow = mysqli_fetch_array($pResult);
               <!--data form-->
               <form id="category_update" class="category_update" name="category_update" action="../../databases/category/category_update_db.php" method="POST">
                 <div class="form-group">
-                    메뉴명 : <input type="text" class="form-control form-control-user" id="category_title" name="category_title" placeholder="메뉴명을 입력해주세요" value="<?=$pRow['category_title']?>">
+                  메뉴명 : <input type="text" class="form-control form-control-user" id="category_title" name="category_title" placeholder="메뉴명을 입력해주세요" value="<?= $pRow['category_title'] ?>">
                 </div>
                 <div class="form-group">
-                사용유무 - 사용 : <input type="radio" id="" name="is_display_YN" value="Y" <?if($pRow['is_display_YN'] == "Y"){?>checked<?}?>/>, 
-                미사용 : <input type="radio" id="" name="is_display_YN" value="N" <?if($pRow['is_display_YN'] == "N"){?>checked<?}?>/>
+                  사용유무 - 사용 : <input type="radio" id="" name="is_display_YN" value="Y" <?if($pRow['is_display_YN']=="Y" ){?>checked
+                  <?}?>/>,
+                  미사용 : <input type="radio" id="" name="is_display_YN" value="N" <?if($pRow['is_display_YN']=="N" ){?>checked
+                  <?}?>/>
                 </div>
-                
 
-                <input type="hidden" name="idx" value="<?=$pRow['idx']?>" />
-                
+
+                <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+
                 <div class="btn btn-primary btn-user btn-block" onclick="category_update_db()">
-                상품수정
+                  상품수정
                 </div>
               </form>
-             
+
             </div>
           </div>
         </div>

@@ -20,7 +20,13 @@ $pSql = "SELECT * FROM PSM_PRODUCT";
 $pSql .= " WHERE idx='$product_idx'";
 $pSql .= " AND is_display='1'";
 $pResult = mysqli_query($conn, $pSql);
-$pRow = mysqli_fetch_array($pResult);
+$pRow = mysqli_fetch_assoc($pResult);
+
+//상품 카테고리 불러오는 query
+$cSql = "SELECT * FROM PSM_CATEGORY";
+$cSql .= " WHERE is_display_YN='Y'";
+$cResult = mysqli_query($conn, $cSql);
+
 
 ?>
 
@@ -85,12 +91,14 @@ $pRow = mysqli_fetch_array($pResult);
                   상품가격 : <input type="text" class="form-control form-control-user" id="product_price" name="product_price" placeholder="상품가격을 입력해주세요" value="<?= $pRow['product_price'] ?>">
                 </div>
                 <div class="form-group">
-                  옷 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds01" <?if($pRow['product_kinds']=="kinds01" ){?>checked
-                  <?}?>>
-                  신발 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds02" <?if($pRow['product_kinds']=="kinds02" ){?>checked
-                  <?}?>>
-                  악세사리 <input type="radio" class="" name="product_kinds" placeholder="상품가격을 입력해주세요" value="kinds03" <?if($pRow['product_kinds']=="kinds03" ){?>checked
-                  <?}?>>
+                  <?
+                    while($cRow = mysqli_fetch_assoc($cResult))
+                    {
+                  ?>
+                  <label for="<?= $cRow['idx'] ?>"><?= $cRow['category_title'] ?></label> <input type="radio" id="<?= $cRow['idx'] ?>" name="product_kinds" value="<?= $cRow['idx'] ?>"> &nbsp;
+                  <?
+                    }
+                  ?>
                 </div>
                 <div class="form-group">
                   전시여부 : <input type="text" class="form-control form-control-user" id="is_display" name="is_display" placeholder="전시여부" value="<?= $pRow['is_display'] ?>">

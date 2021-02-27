@@ -14,39 +14,39 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/index.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/index.php">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>관리자메뉴</span></a>
   </li>
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/register/register_menu.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/register/register_menu.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>고객관리 메뉴</span></a>
   </li>
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/register/register.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/register/register.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>관리자 회원관리 메뉴</span></a>
   </li>
   <!-- 메뉴 생성 -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/category_setting/category.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/category_setting/category.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>메뉴 리스트 관리</span></a>
   </li>
   <!-- 회원등급 -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/grade/grade_insert.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/grade/grade_insert.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>회원등급 관리</span></a>
   </li>
   <!-- 메인배너 등록 -->
   <li class="nav-item active">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/main_banner/main_banner.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/main_banner/main_banner.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>메인배너 이미지 관리</span></a>
   </li>
@@ -128,7 +128,7 @@
 
   <!-- Nav Item - Tables -->
   <li class="nav-item">
-    <a class="nav-link" href="http://localhost/shopping_mall_admin/admin/tables.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/product/product.php">
       <i class="fas fa-fw fa-table"></i>
       <span>상품리스트</span></a>
   </li>

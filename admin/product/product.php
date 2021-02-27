@@ -12,7 +12,7 @@
 
 session_start();
 
-include "../dbconn.php";
+include "../../dbconn.php";
 
 //상품정보 불러오는 query
 $pSql = "SELECT * FROM PSM_PRODUCT";
@@ -35,14 +35,14 @@ $pResult = mysqli_query($conn, $pSql);
   <title>SB Admin 2 - Tables</title>
 
   <!-- Custom fonts for this template -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
   <!-- Custom styles for this page -->
-  <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+  <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -52,7 +52,7 @@ $pResult = mysqli_query($conn, $pSql);
   <div id="wrapper">
     <?php
     //왼쪽 사이드바 include
-    include "./sidebar.php";
+    include "../sidebar.php";
     ?>
 
     <!-- Content Wrapper -->
@@ -62,7 +62,7 @@ $pResult = mysqli_query($conn, $pSql);
       <div id="content">
 
         <?php
-        include "./inc/top_navbar.php";
+        include "../inc/top_navbar.php";
         ?>
         <!-- Begin Page Content -->
         <div class="container-fluid">
@@ -117,12 +117,12 @@ $pResult = mysqli_query($conn, $pSql);
                         <td><?= $kinds ?></td>
                         <td><?= $pRow['product_discount_YN'] ?></td>
                         <td style="text-align:center">
-                          <a href="./product/product_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
+                          <a href="./product_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
                             <i class="fas fa-info-circle"></i>
                           </a>
                         </td>
                         <td style="text-align:center">
-                          <a href="../databases/product/product_delete_db.php?idx=<?= $pRow['idx'] ?>" class="btn btn-danger btn-circle">
+                          <a href="../../databases/product/product_delete_db.php?idx=<?= $pRow['idx'] ?>" class="btn btn-danger btn-circle">
                             <i class="fas fa-trash"></i>
                           </a>
                         </td>
@@ -184,21 +184,21 @@ $pResult = mysqli_query($conn, $pSql);
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../vendor/jquery/jquery.min.js"></script>
+  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
+  <script src="../js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  <script src="../js/demo/datatables-demo.js"></script>
 
 </body>
 
