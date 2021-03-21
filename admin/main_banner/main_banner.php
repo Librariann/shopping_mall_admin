@@ -32,17 +32,7 @@ $mResult = mysqli_query($conn, $mSql);
 
     <title>메인배너 등록</title>
 
-    <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/main_banner.css" rel="stylesheet">
-
-
-    <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <? include "../inc/inc_css.php"; ?>
 
 </head>
 
@@ -50,10 +40,8 @@ $mResult = mysqli_query($conn, $mSql);
 
     <!-- Page Wrapper -->
     <div id="wrapper">
-        <?php
-        //왼쪽 사이드바 include
-        include "../sidebar.php";
-        ?>
+        <!-- 왼쪽 사이드바 include -->
+        <? include "../sidebar.php"; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -61,9 +49,7 @@ $mResult = mysqli_query($conn, $mSql);
             <!-- Main Content -->
             <div id="content">
 
-                <?php
-                include "../inc/top_navbar.php";
-                ?>
+                <? include "../inc/top_navbar.php"; ?>
                 <!-- Begin Page Content -->
                 <div class="container-fluid css_add">
 
@@ -113,7 +99,7 @@ $mResult = mysqli_query($conn, $mSql);
                                                 </a>
                                             </td>
                                             <td style="text-align:center">
-                                                <a href="#" class="btn btn-danger btn-circle" data-toggle="modal" data-target="#mainbanner_update">
+                                                <a href="../../databases/file_upload/delete_mainbanner_img.php?file_id=<?= $maRow['file_id'] ?>" class="btn btn-danger btn-circle">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
@@ -134,8 +120,7 @@ $mResult = mysqli_query($conn, $mSql);
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                                                        <a class="btn btn-primary" href="#" onclick="mainBannerSubmit()">등록</a>
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
                                                     </div>
 
                                                 </div>
@@ -224,22 +209,7 @@ $mResult = mysqli_query($conn, $mSql);
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <? include "../inc/inc_js.php"; ?>
 
     <script>
         function mainBannerSubmit() {
