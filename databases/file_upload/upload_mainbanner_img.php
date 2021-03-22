@@ -41,6 +41,7 @@ if(isset($_FILES['file']) && $_FILES['file']['name'] != "") {
     if(!in_array($ext, $allowed_extensions)) 
     {
         echo "업로드할 수 없는 확장자 입니다.";
+        exit;
     }
 
     // 파일 크기 체크
