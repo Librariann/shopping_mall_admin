@@ -48,7 +48,13 @@
   <li class="nav-item active">
     <a class="nav-link" href="/shopping_mall_admin/admin/main_banner/main_banner.php">
       <i class="fas fa-fw fa-cog"></i>
-      <span>메인배너 이미지 관리</span></a>
+      <span>메인배너 이미지 등록</span></a>
+  </li>
+  <!-- 서브배너 등록 -->
+  <li class="nav-item active">
+    <a class="nav-link" href="/shopping_mall_admin/admin/sub_banner/sub_banner.php">
+      <i class="fas fa-fw fa-cog"></i>
+      <span>서브배너 이미지 등록</span></a>
   </li>
 
   <!-- Divider -->
