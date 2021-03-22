@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/shopping_mall_admin/admin/index.php">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -40,7 +40,7 @@
   </li>
   <!-- 회원등급 -->
   <li class="nav-item active">
-    <a class="nav-link" href="/shopping_mall_admin/admin/grade/grade_insert.php">
+    <a class="nav-link" href="/shopping_mall_admin/admin/grade/grade.php">
       <i class="fas fa-fw fa-cog"></i>
       <span>회원등급 관리</span></a>
   </li>
