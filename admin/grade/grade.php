@@ -30,7 +30,7 @@ $pResult = mysqli_query($conn, $pSql);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Tables</title>
+    <title>등급 리스트</title>
 
     <!-- Custom fonts for this template -->
     <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -69,7 +69,7 @@ $pResult = mysqli_query($conn, $pSql);
                     <p class="mb-4">등급 데이터 테이블 / <a target="_blank" href="https://datatables.net">등급 등록</a></p>
 
 
-                    <a href="./category_insert.php" class="btn btn-secondary btn-icon-split" style="margin-bottom:20px">
+                    <a href="./grade_insert.php" class="btn btn-secondary btn-icon-split" style="margin-bottom:20px">
                         <span class="icon text-white-50">
                             <i class="fas fa-arrow-right"></i>
                         </span>
@@ -87,8 +87,7 @@ $pResult = mysqli_query($conn, $pSql);
                                     <thead>
                                         <tr>
                                             <th>등급명</th>
-                                            <th>등급 사용여부</th>
-                                            <th>순서</th>
+                                            <th>사용여부</th>
                                             <th>수정</th>
                                         </tr>
                                     </thead>
@@ -99,11 +98,18 @@ $pResult = mysqli_query($conn, $pSql);
                                         while ($pRow = mysqli_fetch_array($pResult)) {
                                         ?>
                                             <tr>
-                                                <td><?= $pRow['category_title'] ?></td>
-                                                <td><?= $pRow['is_display_YN'] ?></td>
-                                                <td><?= $pRow['grade_no'] ?></td>
+                                                <td><?= $pRow['grade_title'] ?></td>
+                                                <td>
+                                                    <? 
+                                                    if($pRow['is_display'] == 1){
+                                                        echo "사용";
+                                                    } else {
+                                                        echo "미사용";
+                                                    }
+                                                ?>
+                                                </td>
                                                 <td style="text-align:center">
-                                                    <a href="http://localhost/shopping_mall_admin/admin/category_setting/category_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
+                                                    <a href="/shopping_mall_admin/admin/grade/grade_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-info-circle"></i>
                                                     </a>
                                                 </td>
@@ -145,41 +151,7 @@ $pResult = mysqli_query($conn, $pSql);
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
-    <!-- Page level plugins -->
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/datatables-demo.js"></script>
+    <? include "../inc/inc_js.php" ?>
 
 </body>
 

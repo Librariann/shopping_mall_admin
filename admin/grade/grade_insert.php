@@ -4,18 +4,14 @@ session_start();
  * 
  * 등급 리스트
  * 
- * @file  grade.php
+ * @file  grade_insert.php
  * @author  ParkSeongHyun
- * @since  2020-11-09
- * @desc  등급 리스트 페이지
+ * @since  2021-03-24
+ * @desc  등급 등록 페이지
  * 
  */
 
 include "../../dbconn.php";
-
-//상품정보 불러오는 query
-$pSql = "SELECT * FROM PSM_USER_GRADE";
-$pResult = mysqli_query($conn, $pSql);
 
 ?>
 
@@ -30,7 +26,7 @@ $pResult = mysqli_query($conn, $pSql);
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>SB Admin 2 - Tables</title>
+  <title>등급 등록페이지</title>
 
   <!-- Custom fonts for this template -->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,144 +38,53 @@ $pResult = mysqli_query($conn, $pSql);
   <!-- Custom styles for this page -->
   <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+
+
 </head>
 
-<body id="page-top">
+<body class="bg-gradient-primary">
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-    <?php
-    //왼쪽 사이드바 include
-    include "../sidebar.php";
-    ?>
+  <div class="container">
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
-
-      <!-- Main Content -->
-      <div id="content">
-        <?php
-        include "../inc/top_navbar.php";
-        ?>
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">등급 리스트</h1>
-          <p class="mb-4">등급 데이터 테이블 / <a target="_blank" href="https://datatables.net">등급 등록</a></p>
-
-
-          <a href="./category_insert.php" class="btn btn-secondary btn-icon-split" style="margin-bottom:20px">
-            <span class="icon text-white-50">
-              <i class="fas fa-arrow-right"></i>
-            </span>
-            <span class="text">등급 등록</span>
-          </a>
-
-          <!-- DataTales Example -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">등급 리스트</h6>
-            </div>
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>등급명</th>
-                      <th>등급 사용여부</th>
-                      <th>순서</th>
-                      <th>수정</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-
-                    <?php
-                    while ($pRow = mysqli_fetch_array($pResult)) {
-                    ?>
-                      <tr>
-                        <td><?= $pRow['category_title'] ?></td>
-                        <td><?= $pRow['is_display_YN'] ?></td>
-                        <td><?= $pRow['grade_no'] ?></td>
-                        <td style="text-align:center">
-                          <a href="http://localhost/shopping_mall_admin/admin/category_setting/category_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
-                            <i class="fas fa-info-circle"></i>
-                          </a>
-                        </td>
-                      </tr>
-                    <?php
-                    }
-                    ?>
-
-                  </tbody>
-                </table>
+    <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card-body p-0">
+        <!-- Nested Row within Card Body -->
+        <div class="row">
+          <div class="col-lg-7">
+            <div class="p-5">
+              <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Create an grade!</h1>
               </div>
+
+              <!--data form-->
+              <form id="grade_insert" class="grade_insert" name="grade_insert" action="../../databases/grade/grade_insert_db.php" method="POST">
+                <div class="form-group">
+                  <input type="text" class="form-control form-control-user" id="grade_title" name="grade_title" placeholder="등급명을 입력해주세요">
+                  <input type="text" class="form-control form-control-user" id="grade_no" name="grade_no" placeholder="등급순위를 입력해주세요">
+                </div>
+                <!-- <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="grade_code" name="grade_code" placeholder="메뉴코드를 입력해주세요">
+                </div> -->
+
+
+                <div class="btn btn-primary btn-user btn-block" onclick="grade_insert_db()">
+                  상품등록
+                </div>
+              </form>
+
             </div>
           </div>
-
-        </div>
-        <!-- /.container-fluid -->
-
-      </div>
-      <!-- End of Main Content -->
-
-      <!-- Footer -->
-      <footer class="sticky-footer bg-white">
-        <div class="container my-auto">
-          <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2020</span>
-          </div>
-        </div>
-      </footer>
-      <!-- End of Footer -->
-
-    </div>
-    <!-- End of Content Wrapper -->
-
-  </div>
-  <!-- End of Page Wrapper -->
-
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
-
-  <!-- Logout Modal-->
-  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">×</span>
-          </button>
-        </div>
-        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-        <div class="modal-footer">
-          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="login.html">Logout</a>
         </div>
       </div>
     </div>
+
   </div>
-
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
-  <!-- Page level plugins -->
-  <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="js/demo/datatables-demo.js"></script>
+  <script>
+    function grade_insert_db() {
+      document.grade_insert.submit();
+    }
+  </script>
+  <? include "../inc/inc_js.php" ?>
 
 </body>
 
