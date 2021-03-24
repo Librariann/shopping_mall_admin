@@ -15,6 +15,7 @@ include "../../dbconn.php";
 
 //상품정보 불러오는 query
 $pSql = "SELECT * FROM PSM_USER_GRADE";
+$pSql .= " WHERE is_display='1'";
 $pResult = mysqli_query($conn, $pSql);
 
 ?>
@@ -88,7 +89,9 @@ $pResult = mysqli_query($conn, $pSql);
                                         <tr>
                                             <th>등급명</th>
                                             <th>사용여부</th>
+                                            <th>등급순</th>
                                             <th>수정</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
 
@@ -108,9 +111,15 @@ $pResult = mysqli_query($conn, $pSql);
                                                     }
                                                 ?>
                                                 </td>
+                                                <td><?= $pRow['grade_no'] ?></td>
                                                 <td style="text-align:center">
                                                     <a href="/shopping_mall_admin/admin/grade/grade_update.php?idx=<?= $pRow['idx'] ?>" class="btn btn-info btn-circle">
                                                         <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                </td>
+                                                <td style="text-align:center">
+                                                    <a href="/shopping_mall_admin/databases/grade/grade_delete_db.php?idx=<?= $pRow['idx'] ?>" class="btn btn-danger btn-circle">
+                                                        <i class="fas fa-trash"></i>
                                                     </a>
                                                 </td>
                                             </tr>
