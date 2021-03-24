@@ -14,6 +14,7 @@
 $product_idx = $_REQUEST['idx'];
 
 include "../../dbconn.php";
+include "../function/function.php";
 
 //상품 정보 불러오는 query
 $pSql = "SELECT * FROM PSM_PRODUCT";
@@ -27,7 +28,28 @@ $cSql = "SELECT * FROM PSM_CATEGORY";
 $cSql .= " WHERE is_display_YN='Y'";
 $cResult = mysqli_query($conn, $cSql);
 
+//프로필 이미지 불러오는 query
+$iSql = "SELECT * FROM PSM_UPLOAD_FILE";
+$iSql .= " WHERE file_id='$pRow[file_id]'";
+$iSql .= " AND is_display='1'";
+$iSql .= " ORDER BY idx DESC";
+$iResult = mysqli_query($conn, $iSql);
+$iRow = mysqli_fetch_array($iResult);
 
+//프로필 이미지 불러오는 count query
+$icSql = "SELECT count(*) AS cnt FROM PSM_UPLOAD_FILE";
+$icSql .= " WHERE file_id='$pRow[file_id]'";
+$icSql .= " AND is_display='1'";
+$icSql .= " ORDER BY idx DESC";
+$icResult = mysqli_query($conn, $icSql);
+$icRow = mysqli_fetch_array($icResult);
+
+//파일 고유 id 부여
+if ($pRow['file_id'] == "") {
+  $file_attach_id = uuid();
+} else {
+  $file_attach_id = $pRow['file_id'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -60,8 +82,6 @@ $cResult = mysqli_query($conn, $cSql);
       if (productCheckBox.checked === true) {
         productCheckBox.value = "Y";
       }
-
-
       productUpdate.submit();
     }
   </script>
@@ -118,6 +138,7 @@ $cResult = mysqli_query($conn, $cSql);
                 </div>
 
                 <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+                <input type="hidden" name="file_attach_id" value="<?= $file_attach_id ?>" />
 
                 <div class="btn btn-primary btn-user btn-block" onclick="product_update_db()">
                   상품수정
@@ -126,21 +147,55 @@ $cResult = mysqli_query($conn, $cSql);
 
             </div>
           </div>
+          <!--상품이미지 등록-->
+          <div class="col-lg-5 d-none d-lg-block user-img" style="margin-top:15%">
+            <form action="../../databases/file_upload/upload_product_img.php" method="POST" enctype="multipart/form-data">
+              <div id="image_container">
+                <?
+                  if($icRow['cnt'] > 0)
+                  {
+                ?>
+                <img src="../../databases/file_upload/product/<?= $iRow['file_save_name'] ?>" class="img_preview" />
+                <?
+                  }
+                  else
+                  {
+                ?>
+                <img src="../img/unnamed.jpg" class="img_preview" alt="유저 이미지" />
+                <?
+                  }
+                ?>
+
+              </div>
+              <input type="file" name="file" id="image" accept="image/*" onchange="setThumbnail(event);" />
+              <input type="submit" value="이미지 등록">
+              <input type="hidden" name="file_id" id="" value="<?= $file_attach_id ?>">
+              <input type="hidden" name="idx" value="<?= $pRow['idx'] ?>" />
+            </form>
+          </div>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <? include "../inc/inc_js.php" ?>
 
-  <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script>
+    function setThumbnail(event) {
 
-  <!-- Custom scripts for all pages-->
-  <script src="../js/sb-admin-2.min.js"></script>
+      const unnamed = document.querySelector("img");
+      unnamed.style.display = "none";
+
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        var img = document.createElement("img");
+        img.setAttribute("src", event.target.result);
+        document.querySelector("div#image_container").appendChild(img);
+      };
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  </script>
 
 </body>
 

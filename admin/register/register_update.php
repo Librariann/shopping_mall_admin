@@ -60,7 +60,7 @@ if ($pRow['file_id'] == "") {
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>상품등록 페이지</title>
+  <title>회원정보수정 페이지</title>
 
   <!-- Custom fonts for this template-->
   <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -228,15 +228,7 @@ if ($pRow['file_id'] == "") {
 
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="../vendor/jquery/jquery.min.js"></script>
-  <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Core plugin JavaScript-->
-  <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom scripts for all pages-->
-  <script src="../js/sb-admin-2.min.js"></script>
+  <? include "../inc/inc_js.php" ?>
 
   <script>
     function setThumbnail(event) {
