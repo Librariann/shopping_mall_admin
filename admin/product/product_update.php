@@ -134,6 +134,36 @@ if ($pRow['file_id'] == "") {
                   </div>
                 </div>
                 <div class="form-group">
+                  주문폭주 :
+                  <div class="checkBtn">
+                    <input type="checkbox" name="product_discount_YN" id="chk2" <?if($pRow['product_discount_YN']=="Y" ){?>checked
+                    <?}?>>
+                    <label for="chk2">
+                      <span>선택</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  HIT :
+                  <div class="checkBtn">
+                    <input type="checkbox" name="product_discount_YN" id="chk3" <?if($pRow['product_discount_YN']=="Y" ){?>checked
+                    <?}?>>
+                    <label for="chk3">
+                      <span>선택</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
+                  made by SSUMJ :
+                  <div class="checkBtn">
+                    <input type="checkbox" name="product_discount_YN" id="chk4" <?if($pRow['product_discount_YN']=="Y" ){?>checked
+                    <?}?>>
+                    <label for="chk4">
+                      <span>선택</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group">
                   할인가격 : <input type="text" class="form-control form-control-user" id="product_discount_price" name="product_discount_price" placeholder="할인가격을 입력해주세요" value="<?= $pRow['product_discount_price'] ?>">
                 </div>
 

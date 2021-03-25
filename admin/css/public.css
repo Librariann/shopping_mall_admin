@@ -1,4 +1,7 @@
-.checkBtn #chk1 {
+.checkBtn #chk1,
+#chk2,
+#chk3,
+#chk4 {
   position: absolute;
   left: -1000%;
 }
